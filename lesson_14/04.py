@@ -1,0 +1,13 @@
+string_1 = '{:^10}|{}|{}'.format('name', 'age', 'weight')
+string_2 = '{:,>10}|{:<3d}|{:6.2f}'.format('Evgeniy', 12, 21.22223454)
+string_3 = '{:,>10}|{:<3d}|{:6.2f}'.format('Dima', 22, 51.24456)
+string_4 = '{:,>10}|{:<3d}|{:6.2f}'.format('Victoria', 5, 13.95522357)
+
+print(string_1)
+print('-' * 30)
+print(string_2)
+print(string_3)
+print(string_4)
+print()
+print('Value of scores: {:.3f}%'.format(19.5/22*100))
+print('Value of scores: {:.3%}'.format(19.5/22))
