@@ -11,3 +11,5 @@ s = input("Введите предложение: ").split()
 # s.reverse()
 s = s[::-1]
 print(" ".join(s))
+
+# print((lambda x=input("Введите предложение: "): " ".join(x.split()[::-1]))())
