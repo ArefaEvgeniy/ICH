@@ -6,3 +6,16 @@
 # Name: Alice, Age: 25, City: New York
 # Name: Bob, Age: 30, City: London
 # Name: Carol, Age: 35, City: Paris
+
+from collections import namedtuple
+
+
+Person = namedtuple("Person", ["name", "age", "city"])
+
+p = [Person("Alice", 25, "New York"),
+     Person("Bob", 30, "London"),
+     Person("Carol", 35, "Paris")]
+
+for i in p:
+    name, age, city = i
+    print(f"Name: {name}, Age: {age}, City: {city}")
