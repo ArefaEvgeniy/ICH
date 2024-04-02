@@ -4,7 +4,7 @@ print(list(squared))
 
 
 def my_func(x):
-    return x ** 2
+    return x % 2 == 0
 
 
 squared_2 = filter(my_func, numbers)
