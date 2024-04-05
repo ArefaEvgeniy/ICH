@@ -16,9 +16,14 @@ def get_data() -> dict | None:
         ...
         return data
 
+    def get_fun(data: dict) -> dict:
+        ...
+        return data
+
     data = get_cpu(data)
     data = get_prossec(data)
     data = get_memory(data)
+    data = get_fun(data)
     ...
     return data
 
@@ -41,4 +46,5 @@ def main():
         time.sleep(2)
 
 
-main()
+if __name__ == '__main__':
+    main()
