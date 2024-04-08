@@ -8,16 +8,23 @@
 # Пример вывода:
 # Введите строку: Python
 # Все символы в строке уникальны.
-# Введите строку: Hello
+# Введите строку: Hello Kon
 # Символы 'l' и 'o' повторяются.
 
-s = input("Введите строку:").lower()
+string = input("Введите строку:").lower()
 i = 0
-while i < len(s):
-    if s[i+1:].find(s[i]) == -1:
-        i += 1
+symbols = []
+while i < len(string):
+    if string[i+1:].find(string[i]) != -1 and f"'{string[i]}'" not in symbols:
+        symbols.append(f"'{string[i]}'")
+    i += 1
+
+if symbols:
+    if len(symbols) == 1:
+        res = symbols[0]
     else:
-        print("Символы не уникальны")
-        break
+        res = ", ".join(symbols[:-1])
+        res += f" и {symbols[-1]}"
+    print(f"Символы {res} повторяются.")
 else:
-    print("Символы уникальны")
+    print("Все символы в строке уникальны.")

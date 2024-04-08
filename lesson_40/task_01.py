@@ -1,5 +1,6 @@
 import math
 
+
 class Point(object):
     DEFAULT_COLOR = 'black'
 
@@ -19,6 +20,11 @@ class Point(object):
         y = self.y + other.y
         color = self.__color
         return Point(x, y, color)
+
+    def __sub__(self, other):
+        x = self.x - other.x
+        y = self.y - other.y
+        return Point(x, y, other.__color)
 
     def valid_color(self, color):
         return color if isinstance(color, str) and color else Point.DEFAULT_COLOR
@@ -52,3 +58,7 @@ if __name__ == "__main__":
     point_05 = point_02 + point_03
     print(point_05)
     print(point_05.get_color())
+
+    point_06 = point_01 - point_03
+    print(point_06)
+    print(point_06.get_color())
