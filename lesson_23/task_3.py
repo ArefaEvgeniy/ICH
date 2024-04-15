@@ -17,7 +17,7 @@
 # /(  _  )\
 #   ^^ ^^
 
-n = 9
+n = int(input("Введите число пингвинов: "))
 penguin = ["_~_", "(o o)", "/  V  \\", "/(  _  )\\", "^^ ^^"]
 for i in penguin:
     # print(i.center(11) * n)
