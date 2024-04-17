@@ -1,52 +1,55 @@
 import const
-from bd import get_connection, execute_read_query
+from bd import get_connection, execute_query
 
 
-def prepare_categories(data):
+def prepare_categoris(data):
+    data_print = []
     categories = []
-    result = []
-    for number, name in data:
-        result.append(f'{number:3}   -{name:^15}')
-        categories.append(int(number))
-    result = '\n'.join(result)
-    return result, categories
+    for id_cat, name in data:
+        categories.append(int(id_cat))
+        data_print.append(f'{id_cat:3}  -{name:^15}')
+    data_print = '\n'.join(data_print)
+    return data_print, categories
 
 
-def validation(input_data, categories):
-    result = None
-    if input_data.isdigit() and int(input_data) in categories:
-        result = int(input_data)
-    return result
+def input_category(categories):
+    while True:
+        category = input('Выдерите категорию: ')
+        if not category.isdigit() or int(category) not in categories:
+            print('Ошибка, повторите ввод')
+        else:
+            break
+    return category
 
 
 def print_data(category, connection):
-    data = execute_read_query(connection, const.QUERY_FILMS, category)
-    print('   Название фильма    |  Год | Описание')
-    print('-' * 150)
-    for item in data:
-        print(f'{item[0][:21]:>21} |{item[1]:^6}| {item[2]}')
+    query = const.QUERY_FILMS.format(category)
+    data = execute_query(connection, query)
+    if data is not None:
+        print('-' * 150)
+        print('   Название фильма   |  Год | Описание')
+        print('-' * 150)
+        for name, year, description in data:
+            print(f'{name[:20]:>20} |{year:^6}| {description[:100]}')
 
 
 def main():
     connection = get_connection()
+    if connection is None:
+        return None
 
-    if connection:
-        while True:
-            data = execute_read_query(connection, const.QUERY_CATEGORIES)
-            data_to_print, categories = prepare_categories(data)
-            print(data_to_print)
-            if not (category := validation(input('Выберите категорию: '), categories)):
-                print('Ошибка, повторите ввод')
-                continue
+    data = execute_query(connection, const.QUERY_CATEGOTIES)
+    data_print, categories = prepare_categoris(data)
+    while True:
+        print(data_print)
+        category = input_category(categories)
+        print_data(category, connection)
 
-            print_data(category, connection)
+        if input('Хотите выйти? (Д/Y)').lower() in ('д', 'y'):
+            print('До свидания\nРабота программы завершена')
+            break
 
-            if input('Хотите выйти? (Д/Y)').lower() in ('y', 'д'):
-                print(f"До свидания!\nРабота программы завершена")
-                break
-            print('\n\n')
-
-        connection.close()
+    connection.close()
 
 
 main()

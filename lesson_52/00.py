@@ -8,8 +8,11 @@ dbconfig = {'host': 'ich-db.ccegls0svc9m.eu-central-1.rds.amazonaws.com',
 connection = mysql.connector.connect(**dbconfig)
 cursor = connection.cursor()
 
-cursor.execute("SELECT * FROM store LIMIT 5")
+cursor.execute("SELECT * FROM actor LIMIT 5")
 result = cursor.fetchall()
 
 for row in result:
     print(row)
+
+cursor.close()
+connection.close()
