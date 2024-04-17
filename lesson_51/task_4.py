@@ -7,3 +7,6 @@ import re
 
 string = ('Современные языки программирования, такие как: "Python", "PHP", '
           '"Java", а так же уже устаревшие \'Assembler\' и т.д.')
+
+result = re.findall(r'["\'](\w+)["\']', string)
+print(result)
