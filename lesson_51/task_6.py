@@ -28,7 +28,7 @@ while True:
         print('Часовой пояс:', data['location']['tz_id'])
         print('Температура:', data['current']['temp_c'])
     else:
-        print('Ошибка, статус отвута:', response.status_code)
+        print('Ошибка, статус ответа:', response.status_code)
 
     if input('Хотите выйти? (Y/Д): ').upper() in ('Y', 'Д'):
         break
